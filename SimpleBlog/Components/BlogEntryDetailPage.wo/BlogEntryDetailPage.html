@@ -4,5 +4,16 @@
     <p>Date: <wo:str value="$blogEntry.timestampCreation" dateformat="%Y/%m/%d %H:%M" /></p>
     <p><wo:str value="$blogEntry.body" escapeHTML="false" /></p>
     <p>Author: <wo:str value="$blogEntry.person.fullName" /></p>
+    <div id="comments">
+      <wo:loop list="$blogEntry.blogComments" item="$commentItem">
+        <p><wo:str value="$commentItem.commentText" /></p><br /><wo:str value="$commentItem.person" /> <wo:str value="$commentItem.lastModifed" />
+      </wo:loop>
+      <div id="new_comment_box">
+      <wo:form>
+      	<wo:text value="$newComment" />
+      	<wo:submit action="~addComment" />
+      	</wo:form>
+      </div>
+    </div>
   </div>
 </wo:PublicWrapper>

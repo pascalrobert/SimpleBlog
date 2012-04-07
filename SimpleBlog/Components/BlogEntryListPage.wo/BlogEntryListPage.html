@@ -11,6 +11,9 @@
           <wo:str value="$entryItem.person.fullName" />
         </p>
         <p><wo:str value="$entryItem.body" escapeHTML="false" /></p>
+        <wo:if condition="$entryItem.blogComments.count">
+        	<p><wo:str value="$entryItem.blogComments.count" /> comments</p>
+        </wo:if>
         <p>Posted in: 
           <wo:loop list="$entryItem.categories" item="$entryCategory">
             <wo:ERXRouteLink action="show" record="$entryCategory"><wo:str value="$entryCategory.categoryDescription" /></wo:ERXRouteLink>

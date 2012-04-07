@@ -27,15 +27,29 @@
             prototypeName = intNumber; 
         }, 
         {
+            columnName = status; 
+            name = status; 
+            prototypeName = javaEnum; 
+            valueClassName = "com.wowodc.model.enums.BlogCommentStatus"; 
+        }, 
+        {
             allowsNull = Y; 
             columnName = timestampCreation; 
             name = timestampCreation; 
             prototypeName = dateTime; 
         }
     ); 
-    attributesUsedForLocking = (blogEntryID, commentText, id, personID, rating); 
+    attributesUsedForLocking = (blogEntryID, commentText, id, personID, rating, status); 
     className = "com.wowodc.model.BlogComment"; 
-    classProperties = (blogEntry, commentText, lastModifed, person, rating, timestampCreation); 
+    classProperties = (
+        blogEntry, 
+        commentText, 
+        lastModifed, 
+        person, 
+        rating, 
+        status, 
+        timestampCreation
+    ); 
     externalName = BlogComment; 
     fetchSpecificationDictionary = {}; 
     internalInfo = {"_javaClientClassName" = BlogComment; }; 

@@ -1,12 +1,13 @@
 package com.wowodc.ui.components;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
+import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WOResponse;
+import com.wowodc.model.BlogComment;
 import com.wowodc.model.BlogEntry;
 import com.wowodc.model.SyncInfo;
+import com.wowodc.model.SystemPreference;
+import com.wowodc.model.enums.BlogCommentStatus;
 import com.wowodc.rest.controllers.BlogEntryController;
 
 import er.rest.routes.ERXRouteParameter;
@@ -15,6 +16,8 @@ public class BlogEntryDetailPage extends RestComponent {
 
   private BlogEntry entryItem;
   private SyncInfo syncDetails = null;
+  public BlogComment commentItem;
+  public BlogComment newComment;
   
   public BlogEntryDetailPage(WOContext context) {
     super(context);
@@ -35,6 +38,18 @@ public class BlogEntryDetailPage extends RestComponent {
   
   public void setSyncDetails(SyncInfo syncDetails) {
     this.syncDetails = syncDetails;
+  }
+  
+  public WOActionResults addComment() {
+    SystemPreference shouldModeratePref = SystemPreference.fetchSystemPreference(syncDetails.editingContext(), SystemPreference.NAME.eq("mustModerateComments"));
+    boolean shouldModerate = new Boolean(shouldModeratePref.prefValue());
+    if (shouldModerate) {
+      newComment.setStatus(BlogCommentStatus.AWAITING_ACTION);
+    } else {
+      newComment.setStatus(BlogCommentStatus.MODERATED);      
+    }
+    syncDetails.editingContext().saveChanges();
+    return null;
   }
   
   @Override

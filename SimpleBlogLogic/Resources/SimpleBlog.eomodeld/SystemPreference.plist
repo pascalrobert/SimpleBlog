@@ -1,0 +1,19 @@
+{
+    attributes = (
+        {
+            columnName = helpfulDescription; 
+            name = helpfulDescription; 
+            prototypeName = varchar1000; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = name; name = name; prototypeName = varchar100; }, 
+        {columnName = prefValue; name = prefValue; prototypeName = varchar255; }
+    ); 
+    attributesUsedForLocking = (helpfulDescription, id, name, prefValue); 
+    className = "com.wowodc.model.SystemPreference"; 
+    classProperties = (helpfulDescription, name, prefValue); 
+    externalName = SystemPreference; 
+    fetchSpecificationDictionary = {}; 
+    name = SystemPreference; 
+    primaryKeyAttributes = (id); 
+}

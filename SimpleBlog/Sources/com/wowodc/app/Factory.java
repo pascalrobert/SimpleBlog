@@ -16,6 +16,7 @@ import com.webobjects.foundation.NSKeyValueCoding;
 import com.wowodc.model.BlogComment;
 import com.wowodc.model.BlogEntry;
 import com.wowodc.model.Person;
+import com.wowodc.model.enums.BlogCommentStatus;
 
 import er.directtoweb.ERD2WFactory;
 import er.directtoweb.pages.ERD2WInspectPage;
@@ -215,7 +216,7 @@ public class Factory extends ERD2WFactory implements NSKeyValueCoding {
           currentPerson = (Person.fetchRequiredPerson(ERXEC.newEditingContext(), "login", "system")).localInstanceIn(peer);
         }
 
-      BlogComment newComment = BlogComment.createBlogComment(peer, aBlogEntry, currentPerson);
+      BlogComment newComment = BlogComment.createBlogComment(peer, BlogCommentStatus.AWAITING_ACTION, aBlogEntry, currentPerson);
       epi = (EditPageInterface) editPageNamed("EditBlogComment", newComment);
       epi.setObject(newComment);
       epi.setNextPage(currentPage());

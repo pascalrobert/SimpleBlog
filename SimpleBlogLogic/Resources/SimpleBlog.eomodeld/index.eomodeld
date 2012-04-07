@@ -10,6 +10,7 @@
         {className = "com.wowodc.model.Person"; name = Person; }, 
         {className = "com.wowodc.model.Role"; name = Role; }, 
         {className = "com.wowodc.model.SyncInfo"; name = SyncInfo; }, 
+        {className = "com.wowodc.model.SystemPreference"; name = SystemPreference; }, 
         {className = EOGenericRecord; name = XPersonRole; }
     ); 
 }

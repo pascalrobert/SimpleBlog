@@ -19,6 +19,7 @@ public abstract class _BlogComment extends  ERXGenericRecord {
   public static final ERXKey<String> COMMENT_TEXT = new ERXKey<String>("commentText");
   public static final ERXKey<NSTimestamp> LAST_MODIFED = new ERXKey<NSTimestamp>("lastModifed");
   public static final ERXKey<Integer> RATING = new ERXKey<Integer>("rating");
+  public static final ERXKey<com.wowodc.model.enums.BlogCommentStatus> STATUS = new ERXKey<com.wowodc.model.enums.BlogCommentStatus>("status");
   public static final ERXKey<NSTimestamp> TIMESTAMP_CREATION = new ERXKey<NSTimestamp>("timestampCreation");
   // Relationship Keys
   public static final ERXKey<com.wowodc.model.BlogEntry> BLOG_ENTRY = new ERXKey<com.wowodc.model.BlogEntry>("blogEntry");
@@ -28,6 +29,7 @@ public abstract class _BlogComment extends  ERXGenericRecord {
   public static final String COMMENT_TEXT_KEY = COMMENT_TEXT.key();
   public static final String LAST_MODIFED_KEY = LAST_MODIFED.key();
   public static final String RATING_KEY = RATING.key();
+  public static final String STATUS_KEY = STATUS.key();
   public static final String TIMESTAMP_CREATION_KEY = TIMESTAMP_CREATION.key();
   // Relationships
   public static final String BLOG_ENTRY_KEY = BLOG_ENTRY.key();
@@ -74,6 +76,17 @@ public abstract class _BlogComment extends  ERXGenericRecord {
     	_BlogComment.LOG.debug( "updating rating from " + rating() + " to " + value);
     }
     takeStoredValueForKey(value, _BlogComment.RATING_KEY);
+  }
+
+  public com.wowodc.model.enums.BlogCommentStatus status() {
+    return (com.wowodc.model.enums.BlogCommentStatus) storedValueForKey(_BlogComment.STATUS_KEY);
+  }
+
+  public void setStatus(com.wowodc.model.enums.BlogCommentStatus value) {
+    if (_BlogComment.LOG.isDebugEnabled()) {
+    	_BlogComment.LOG.debug( "updating status from " + status() + " to " + value);
+    }
+    takeStoredValueForKey(value, _BlogComment.STATUS_KEY);
   }
 
   public NSTimestamp timestampCreation() {
@@ -138,8 +151,10 @@ public abstract class _BlogComment extends  ERXGenericRecord {
   }
   
 
-  public static com.wowodc.model.BlogComment createBlogComment(EOEditingContext editingContext, com.wowodc.model.BlogEntry blogEntry, com.wowodc.model.Person person) {
+  public static com.wowodc.model.BlogComment createBlogComment(EOEditingContext editingContext, com.wowodc.model.enums.BlogCommentStatus status
+, com.wowodc.model.BlogEntry blogEntry, com.wowodc.model.Person person) {
     com.wowodc.model.BlogComment eo = (com.wowodc.model.BlogComment) EOUtilities.createAndInsertInstance(editingContext, _BlogComment.ENTITY_NAME);    
+		eo.setStatus(status);
     eo.setBlogEntryRelationship(blogEntry);
     eo.setPersonRelationship(person);
     return eo;
